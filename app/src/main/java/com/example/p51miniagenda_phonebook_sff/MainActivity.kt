@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
                     telefono.error = getString(R.string.no_buitT)
                 }
             } else {
-                if (name.isNotEmpty() && telefono2.isNotEmpty()) {
-                    if (sharedPref.contains(name.uppercase()) && sharedPref.contains(telefono2)) {
-                        Toast.makeText(this, "penee", Toast.LENGTH_SHORT).show()
+                if (sharedPref.contains(name.uppercase())) {
+                    val telefonoGuardado = sharedPref.getString(name.uppercase(), null)
+                    if (telefonoGuardado == telefono2) {
                         preguntarAct(name)
                     }
                     val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -49,9 +49,12 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.save_data), Toast.LENGTH_SHORT).show()
                     clear()
                 } else {
-                    Toast.makeText(this, getString(R.string.no_buits), Toast.LENGTH_SHORT).show()
-                    telefono.error = getString(R.string.no_buitT)
-                    player.error = getString(R.string.no_buitN)
+                    if (telefono2.isEmpty()) {
+                        Toast.makeText(this, getString(R.string.no_buits), Toast.LENGTH_SHORT)
+                            .show()
+                        telefono.error = getString(R.string.no_buitT)
+                        player.error = getString(R.string.no_buitN)
+                    }
                 }
             }
         }
@@ -89,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             editor.remove(name.uppercase())
             editor.apply()
             Toast.makeText(this, getString(R.string.eliminat), Toast.LENGTH_SHORT).show()
+            clear()
             cerrarDialogo(dialog)
         }
         cancelarButton.setOnClickListener {
@@ -104,19 +108,13 @@ class MainActivity : AppCompatActivity() {
         val cancelarButton = dialogView.findViewById<Button>(R.id.dialog_Cancelar_button)
         val updateButton = dialogView.findViewById<Button>(R.id.dialog_actualizar_button)
 
-        val telefono_new = telefono.text.toString().trim()
-
         updateButton.setOnClickListener {
-            if (telefono_new.isNotEmpty()) {
                 val sharedPref = getPreferences(MODE_PRIVATE)
                 val editor = sharedPref.edit()
-                editor.putString(name.uppercase(), telefono_new)
                 editor.apply()
                 Toast.makeText(this, "Actualizado correctamente.", Toast.LENGTH_SHORT).show()
+                clear()
                 cerrarDialogo(dialog)
-            } else {
-                Toast.makeText(this, "Por favor, escribe un número válido.", Toast.LENGTH_SHORT).show()
-            }
         }
         cancelarButton.setOnClickListener {
             cerrarDialogo(dialog, getString(R.string.cancelat))
