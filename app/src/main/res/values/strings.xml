@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">P5.1 Miniagenda - Phone Book-sff</string>
+
+    <!-- Mensajes generales -->
+    <string name="save_data">Datos guardados correctamente.</string>
+    <string name="no_buits">Nombre y teléfono no pueden estar vacíos.</string>
+    <string name="no_buitT">El teléfono no puede estar vacío.</string>
+    <string name="no_buitN">El nombre no puede estar vacío.</string>
+    <string name="no_trobat">Teléfono no encontrado.</string>
+    <string name="introduir_nom">Por favor, introduce un nombre.</string>
+    <string name="eliminat">Eliminado correctamente.</string>
+    <string name="cancelat">Operación cancelada.</string>
+
+    <!-- Diálogo de eliminación -->
+    <string name="delete_dialog_title">Confirmación de Eliminación</string>
+    <string name="delete_dialog_message">¿Estás seguro de que deseas eliminar este contacto?</string>
+    <string name="delete_dialog_confirm">Eliminar</string>
+    <string name="delete_dialog_cancel">Cancelar</string>
+
+    <!-- Diálogo de actualización -->
+    <string name="update_dialog_title">Actualizar Número</string>
+    <string name="update_dialog_message">Introduce el nuevo número para actualizar el contacto.</string>
+    <string name="update_dialog_confirm">Actualizar</string>
+    <string name="update_dialog_cancel">Cancelar</string>
+
+    <!-- Mensajes de actualización -->
+    <string name="update_successful">Actualizado correctamente.</string>
+    <string name="invalid_number">Por favor, escribe un número válido.</string>
 </resources>
