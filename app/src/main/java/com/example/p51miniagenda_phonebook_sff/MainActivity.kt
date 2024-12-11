@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                      val editor: SharedPreferences.Editor = sharedPref.edit()
 
             editor.putString("name", name)
-            editor.putString("telefono", telefono2)
+            editor.putString("telefono", telefono2) //mariacarmrfeewew eew y colgó
 
             editor.apply()
         }
