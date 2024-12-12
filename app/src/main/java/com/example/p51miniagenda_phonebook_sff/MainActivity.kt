@@ -29,32 +29,27 @@ class MainActivity : AppCompatActivity() {
             val name = player.text.toString().trim().uppercase()
             val telefono2 = telefono.text.toString().trim().uppercase()
 
-            if (name.isNotEmpty() && telefono2.isEmpty()) {
-                val nameG = sharedPref.getString(name.uppercase(), null)
-                if (nameG != null) {
-                    preguntarEli(name)
-                } else {
-                    Toast.makeText(this, getString(R.string.no_buitT), Toast.LENGTH_SHORT).show()
-                    telefono.error = getString(R.string.no_buitT)
-                }
+            if (name.isEmpty() || (telefono2.isEmpty()) && !sharedPref.contains(name)) {
+                // Mostrar mensajes de error si alguno de los campos está vacío
+                Toast.makeText(this, getString(R.string.no_buits), Toast.LENGTH_SHORT).show()
+                if (name.isEmpty()) player.error = getString(R.string.no_buitN)
+                if (telefono2.isEmpty()) telefono.error = getString(R.string.no_buitT)
             } else {
-                if (sharedPref.contains(name.uppercase())) {
-                    val telefonoGuardado = sharedPref.getString(name.uppercase(), null)
-                    if (telefonoGuardado == telefono2) {
-                        preguntarAct(name)
+
+                // Si ambos campos están llenos, proceder a guardar los datos
+                if (sharedPref.contains(name)) {
+                    if (telefono2.isNotEmpty()) {
+                        preguntarAct(name) //actualizar
+                    } else {
+                        preguntarEli(name) //quiere eliminar
                     }
+                } else {
+                    // Si el nombre no existe, guardar los datos
                     val editor: SharedPreferences.Editor = sharedPref.edit()
                     editor.putString(name, telefono2)
                     editor.apply()
                     Toast.makeText(this, getString(R.string.save_data), Toast.LENGTH_SHORT).show()
                     clear()
-                } else {
-                    if (telefono2.isEmpty()) {
-                        Toast.makeText(this, getString(R.string.no_buits), Toast.LENGTH_SHORT)
-                            .show()
-                        telefono.error = getString(R.string.no_buitT)
-                        player.error = getString(R.string.no_buitN)
-                    }
                 }
             }
         }
